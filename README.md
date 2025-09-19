@@ -1,200 +1,179 @@
 # Constitutional-AI Framework 🛡️
 
-> A framework for providing provably reliable guarantees for Large Language Models (LLMs), utilizing an external 'World Model Constitution' to constrain generation, and exploring a path toward an endogenous layered architecture.  
-> **中文**: 一个为大型语言模型（LLM）提供可证明可靠性保证的框架，通过外部"世界模型宪法"约束生成，并探索通向内生分层式架构的路径。
+> **Paradigm Manifesto**: We are at a turning point in AI programming paradigms. Traditional prompt engineering and fine-tuning cannot provide deterministic guarantees. This framework proposes a new paradigm: **Perceptive Programming**. Developers declare **Intents** and **Constraints** through objects, which are then reliably executed by AI components with world-awareness. Starting from a solid OOP foundation, we provide you with an evolvable path to the future of AI applications.
+>
+> **中文**: 我们正处于AI编程范式的转折点。传统提示工程与微调无法提供确定性保障。本框架提出一种新范式：**感知式编程（Perceptive Programming）**。开发者通过对象声明**意图（Intents）**与**约束（Constraints）**，由具备世界感知能力的AI组件可靠执行。我们从坚实的OOP底座出发，为您提供通往未来AI应用的可演进路径。
 
 ## 📖 Table of Contents
-- [✨ Features](#-features)
-- [🎯 Motivation](#-motivation)
-- [🏗️ Core Architecture](#️-core-architecture)
-- [🚀 Quick Start](#-quick-start)
-- [📁 Project Structure](#-project-structure)
-- [🤝 Contributing](#-contributing)
-- [📜 License](#-license)
-- [🔮 Future Vision](#-future-vision)
-- [🙏 Acknowledgments](#-acknowledgments)
+- [🚀 Paradigm Shift](#🚀-paradigm-shift)
+- [✨ Framework Features](#✨-framework-features)
+- [🏗️ Core Architecture: Object Model](#🏗️-core-architecture-object-model)
+- [🔧 Quick Start: Two Paradigms](#🔧-quick-start-two-paradigms)
+- [🧩 Detailed Explanation of Core Classes](#🧩-detailed-explanation-of-core-classes)
+- [📁 Project Structure](#📁-project-structure)
+- [🤝 How to Contribute](#🤝-how-to-contribute)
+- [📜 License](#📜-license)
+- [🔮 Future Vision](#🔮-future-vision)
 
 ---
 
-## ✨ Features
-- **🧠 Provable Reliability**: Based on a formal "generate-validate" cycle, mathematically guaranteeing output consistency with the world model and eliminating factual hallucinations.
-- **📚 External Knowledge Integration**: Supports flexible definition of domain-specific "World Model Constitutions" (e.g., knowledge graphs, rule engines, business databases).
-- **⚙️ Engineering Friendly**: Provides clear APIs and modular design for easy integration into existing production pipelines.
-- **🔬 Research Forward-looking**: Offers not only short-term solutions but also a clear evolutionary path toward next-generation "Layered LLMs".
+## 🚀 Paradigm Shift
 
-## 🎯 Motivation
-The hallucination problem in Large Language Models (LLMs) is a core obstacle to their deployment in high-risk domains (e.g., healthcare, finance, judiciary). Existing methods like Retrieval-Augmented Generation (RAG) and Fine-tuning operate solely within probabilistic frameworks and cannot provide deterministic guarantees.
+Current LLM application development is stuck in the quagmire of "prompt engineering," which essentially **forces developers to adapt to the model**. We believe the future belongs to a new paradigm where **the model adapts to the developer’s intent**.
 
-This framework aims to achieve a **paradigm shift**: from focusing on "correcting the model internally" to "architecturally guaranteeing output", and ultimately moving toward "reconstructing the model itself".
+This framework is the practical embodiment of this belief. It is not just a simple toolkit, but an **evolvable architecture** that allows you to smoothly transition from the familiar OOP style of today to the declarative programming of tomorrow.
 
-## 🏗️ Core Architecture
-This framework is based on a dual-path evolutionary strategy:
+```mermaid
+graph LR
+    A[Traditional Prompt Engineering<br>Adapting to the Model] --> B[OOP Coordination Paradigm<br>Controlling the Model]
+    B --> C[Declarative Paradigm<br>Declaring Intent]
+    C --> D[Perceptive Paradigm<br>World-Aware AI Agents]
 
-### 1. Short-term Paradigm: Constitutional Constraint Architecture
-```text
-User Request
-    │
-    ▼
-[LLM Generator] ───Generate──→ Candidate Text ────→ [Constitution Validator] ←─── World Model Constitution (W)
-    │                             │                           │
-    │                             │                           ▼
-    │                             └─── Compliant? ──── Yes ────→ Output Reliable Result
-    │                                                 │
-    └─────── Learn & Adjust ←─────── No ←─────────────┘
+    style A fill:#f9f,stroke:#333
+    style D fill:#9cf,stroke:#333
 ```
 
-### 2. Long-term Vision: Layered LLM Architecture
-The long-term goal is to achieve fundamental architectural innovation, internalizing external constraints into the model's inherent layered knowledge structure.
-```text
-User Request
-    │
-    ▼
-[Meta-Router] ────→ Distribute to Specialized Knowledge Layers ────→ Integrate Final Output
-    │ 
-    ├───→ [Attribute Layer] (Encodes static concepts, entity attributes)
-    │
-    ├───→ [Information Layer] (Encodes dynamic facts, event relationships)
-    │
-    └───→ [Behavior Layer] (Encodes procedural methods, operational protocols)
+## ✨ Framework Features
+
+- **🪙 Dual-Paradigm Support**: Provides both the precise **OOP Coordination Paradigm** (production-ready today) and exploration of the future **Declarative Paradigm** (a window into tomorrow).
+- **🔒 Provable Reliability**: Based on the concept of formal verification, it provides deterministic guarantees through the `WorldModel` object to eliminate hallucinations.
+- **🧱 Modularity & Evolvability**: Clear abstractions and interfaces. Every component can be replaced or upgraded, witnessing the framework’s evolution from "constrained generation" to "perceptive execution."
+- **🧪 Testability**: Based on interface-oriented programming and dependency injection, making each core object easy to mock and test.
+
+## 🏗️ Core Architecture: Object Model
+
+The core of the framework is a "generate-validate" loop based on object collaboration. Its static structure consists of several key objects, and the dynamic collaboration flow is shown in the diagram below, which clearly illustrates how information flows between objects and the decision-making cycle:
+
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant P as ConstitutionalPipeline
+    participant G as LLMGenerator
+    participant V as Validator
+    participant WM as WorldModel
+
+    U->>P: run("User Query")
+    Note over P: Coordination Loop Starts
+    P->>G: generate(Initial Prompt)
+    G-->>P: Tentative Output
+    P->>V: check(Tentative Output)
+    V->>WM: check_rule(Tentative Output)
+    WM-->>V: Rule Check Result
+    V-->>P: Validation Result
+
+    alt Validation Passes
+        P-->>U: Final Reliable Output
+    else Validation Fails
+        P->>P: _correct(Construct Correction Prompt)
+        P->>G: generate(Correction Prompt)
+        G-->>P: New Tentative Output
+        Note over P: Loop Until Success or Timeout
+    end
 ```
 
-#### Core Functions of Each Layer
-- **Foundation Layer**: Inherits existing Transformer architecture, responsible for general language understanding and basic reasoning, providing underlying language capability support.
-- **Attribute Layer**: Encodes **static, declarative knowledge** (e.g., concepts, entities, attributes). Example: "The boiling point of water is 100°C", "Aspirin contraindicated population = gastric ulcer patients".
-- **Information Layer**: Encodes **dynamic, event-based knowledge** (e.g., facts, relationships, events). Example: "Company A acquired Company B in 2023", "Patient's 2024-10-01 blood pressure = 160/100mmHg".
-- **Behavior Layer**: Encodes **procedural, methodological knowledge** (e.g., operational steps, algorithms, protocols). Example: "3 steps to configure a web server", "Grade 1 hypertension: lifestyle intervention first, then medication".
-- **Meta-Router**: Intelligent dispatcher that analyzes input query intent (e.g., "medication recommendation" requires calling Attribute + Information + Behavior layers), distributes to appropriate knowledge layers, and integrates results, ensuring coherent reasoning logic.
+## 🔧 Quick Start: Two Paradigms
 
-#### Evolutionary Relationship
-This vision is a natural evolution of the "Constitutional Paradigm", achieving an upgrade from "external constraints → internal modularization":
-- `External World Model (W)` —Evolves→ `Internal Attribute/Information/Behavior Layers` (Structured knowledge internalized into modules)
-- `External Validation Function (C)` —Evolves→ `Internal Meta-Router and Inter-layer Coordination Mechanism` (Post-hoc validation → Preemptive scheduling)
+### Paradigm 1: OOP Coordination Paradigm (Recommended for Production)
+**Core Idea**: You act as an "architect," controlling the AI’s behavior flow by composing objects.
 
-## 🚀 Quick Start
-### Installation
-```bash
-# Install from source (recommended)
-git clone https://github.com/your-username/Constitutional-AI.git
-cd Constitutional-AI
-pip install -e .
-```
-
-### Basic Usage
-#### Example 1: Load World Model and Validate Proposition
 ```python
-from constitutional_ai import WorldModel, Validator
+# 1. Assemble your AI system components
+from constitutional_ai import WorldModel, Validator, LLMGenerator, ConstitutionalPipeline
 
-# 1. Load a domain-specific World Model Constitution (example: medical domain rules)
-# Example World Model JSON format (can be saved separately as medical_rules.json):
-# {
-#   "entities": [
-#     {
-#       "name": "Ibuprofen",
-#       "attributes": {
-#         "contraindicated_population": "infants <6 months",
-#         "pediatric_dosage": "5-10mg/kg/dose"
-#       }
-#     }
-#   ],
-#   "rules": [
-#     "IF patient_age <6 months THEN contraindicate ibuprofen",
-#     "IF recommending pediatric medication THEN must specify dosage range"
-#   ]
-# }
-constitution = WorldModel.from_json('./world_models/medical_rules.json')
+# Build the knowledge core
+medical_constitution = WorldModel.from_json('./world_models/medical_rules.json')
+# Build the validation brain
+medical_validator = Validator(world_model=medical_constitution)
+# Build the generation module
+llm_generator = LLMGenerator(model_name="gpt-4")
+# Assemble the coordination hub
+pipeline = ConstitutionalPipeline(generator=llm_generator, validator=medical_validator)
 
-# 2. Validate an LLM-generated proposition (e.g., "Recommend ibuprofen for a 2-year-old child")
-validation_result = Validator.check(
-    proposition="Recommend ibuprofen for a 2-year-old child, 8mg/kg per dose",
-    world_model=constitution
-)
-
-# 3. Output validation results
-print(f"Compliant: {validation_result.compliant}")  # Output: Compliant: True
-print(f"Reason: {validation_result.reason}")        # Output: Reason: 1. Patient age 2 years ≥6 months, meets ibuprofen usage conditions; 2. Specified pediatric dosage 8mg/kg, complies with dosage specification rules
-print(f"Related entities: {validation_result.related_entities}")  # Output: Related entities: [{"name": "Ibuprofen", "used_attribute": "contraindicated_population, pediatric_dosage"}]
+# 2. Execute reliable tasks
+result = pipeline.run("Recommend antipyretics and their usage for a 2-year-old child with a fever")
+print(result) # Obtain guaranteed output
 ```
 
-#### Example 2: Integrated LLM Generation Pipeline
+### Paradigm 2: Declarative Paradigm (Experience the Future)
+**Core Idea**: You act as a "director," declaring goals and rules, and letting the AI agent complete the task independently.
+
 ```python
-from constitutional_ai import LLMGenerator, ConstitutionalPipeline
+# 🚧 (Experimental Feature) Experience intent-declarative programming
+from constitutional_ai.experimental import Agent
 
-# 1. Initialize LLM Generator (supports connecting to APIs like GPT-4, Wenxin Yiyan, etc.)
-llm_generator = LLMGenerator(
-    model_name="gpt-4",
-    api_key="your-api-key"  # Replace with your actual API key
+# Declare your domain, goals, and constraints
+medical_agent = Agent.with_rules(
+    domain="pediatrics",
+    goal="Provide safe and compliant medication advice",
+    constraints=["Must strictly adhere to the Chinese Pharmacopoeia 2020 Edition", "Output must include dosage warnings"],
+    world_model='./world_models/medical_rules.json'
 )
 
-# 2. Build "generate-validate" pipeline (reuse the medical domain world model above)
-pipeline = ConstitutionalPipeline(
-    llm_generator=llm_generator,
-    world_model=constitution
-)
-
-# 3. Process user request (generate compliant result)
-user_request = "Recommend antipyretic medication and usage for a 2-year-old febrile child"
-final_output = pipeline.run(user_request)
-
-# Output results
-print(f"User request: {user_request}")
-print(f"Compliant generation result: {final_output}")
-# Expected output:
-# User request: Recommend antipyretic medication and usage for a 2-year-old febrile child
-# Compliant generation result: Recommended antipyretic: Ibuprofen. Usage: 8mg/kg per dose (e.g., 80mg per dose for a 10kg child), every 6-8 hours, not exceeding 4 times in 24 hours.
-# Note: 2-year-old child meets ibuprofen age condition (≥6 months), dosage within recommended range (5-10mg/kg/dose).
+# The system automatically understands and executes
+result = medical_agent.execute("Recommend antipyretics for a 2-year-old child with a fever")
 ```
+**Evolution Note**: The second paradigm still calls the objects of the first paradigm under the hood, but it provides a higher-level abstraction and represents the framework’s evolutionary direction.
 
-## 📁 Project Structure
+## 🧩 Detailed Explanation of Core Classes
+
+### 1. `WorldModel` Class
+**Responsibility**: Encapsulates domain knowledge and serves as the cornerstone of the framework’s reliability.
+**Evolution Path**: In the future, it will evolve from a "static data holder" to a "dynamic perception interface" (`DynamicWorldModel`) that can query knowledge graphs, databases, and APIs on demand.
+
+### 2. `Validator` Class
+**Responsibility**: Encapsulates validation logic and acts as the guardian of rules.
+**Evolution Path**: In the future, it will integrate formal methods such as theorem provers to provide more powerful validation capabilities.
+
+### 3. `LLMGenerator` Class
+**Responsibility**: Encapsulates interactions with LLMs and acts as the executor of capabilities.
+**Evolution Path**: Will evolve into a `ToolExecutor` that can not only generate text but also call functions and toolchains.
+
+### 4. `ConstitutionalPipeline` Class
+**Responsibility**: Coordinates workflows and acts as the central nervous system of the system.
+**Evolution Path**: Will evolve into a `SelfReflectiveAgent` with metacognitive capabilities for planning, reflection, and strategy adjustment.
+
+*(Detailed descriptions of other classes remain unchanged; the focus is on highlighting the evolution path of each class)*
+
+## 📁 Project Structure: Reflecting Architectural Evolution
+
 ```
 Constitutional-AI/
-├── docs/                      # Project documentation (incl. World Model construction guide, API manual)
-│   ├── world_model_guide.md   # World Model (Attribute/Information/Behavior) definition specifications
-│   └── api_reference.md       # Framework API interface documentation
-├── src/                       # Framework core source code
-│   ├── constitutional_ai/     # Main package
-│   │   ├── world_model.py     # World Model (entity/rule/state) definition and loading
-│   │   ├── validator.py       # Constitution Validator (compliance check logic)
-│   │   ├── llm_generator.py   # LLM Generator (interface with third-party LLM APIs)
-│   │   └── pipeline.py        # "Generate-Validate" pipeline
-│   └── __init__.py            # Package initialization
-├── world_models/              # Example World Model Constitution library
-│   ├── medical_rules.json     # Medical domain rules (e.g., drug contraindications, clinical pathways)
-│   ├── finance_rules.json     # Finance domain rules (e.g., compliance clauses, risk control logic)
-│   └── game_rules.json        # Gaming domain rules (e.g., character attributes, quest logic)
-├── examples/                  # Scenario-based usage examples
-│   ├── medical_demo.py        # Medical medication recommendation example
-│   ├── finance_demo.py        # Financial compliance review example
-│   └── game_demo.py           # Game NPC dialogue generation example
-├── tests/                     # Unit tests
-│   ├── test_world_model.py    # World Model loading and parsing tests
-│   └── test_validator.py      # Compliance validation logic tests
-├── CONTRIBUTING.md            # Contribution guidelines (incl. code standards, PR process)
-├── LICENSE                    # MIT License file
-└── README.md                  # Project documentation (this document)
+├── src/
+│   └── constitutional_ai/
+│       ├── __init__.py
+│       ├── core/                    # Core objects (modern paradigm)
+│       │   ├── world_model.py
+│       │   ├── validator.py
+│       │   └── ...
+│       ├── experimental/            # Exploration of next-generation paradigms
+│       │   ├── __init__.py
+│       │   ├── agents.py           # Agent, SelfReflectiveAgent
+│       │   └── perception.py       # Prototype of DynamicWorldModel
+│       └── generators/
+│           └── ...
+├── examples/
+│   ├── core_paradigm.py            # Modern paradigm examples
+│   └── experimental_paradigm.py    # Future paradigm examples
+└── tests/
 ```
 
-## 🤝 Contributing
-We welcome contributions of any form, including but not limited to:
-1. **Code Contributions**: Bug fixes, new features (e.g., support for more LLM interfaces, extended World Model formats);
-2. **Documentation Improvements**: Additional use cases, optimized API documentation, World Model construction tutorials;
-3. **Scenario Expansion**: Submit World Model Constitutions for new domains (e.g., education, legal domain rules);
-4. **Issue Reporting**: Submit bug reports or feature suggestions in GitHub Issues.
+## 🤝 How to Contribute: Co-Build the New Paradigm
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing to understand code standards, branch management, and the PR process.
+We welcome you to contribute in various ways to collectively shape the future of programming:
+1.  **Strengthen the Present**: Implement new `Generator` classes, enhance `WorldModel` loaders, and write tests.
+2.  **Explore the Future**: In the `experimental/` directory, try implementing `DynamicWorldModel` or improving the intent parsing of `Agent`.
+3.  **Contribute Use Cases**: Share how you use this framework to solve practical problems in `examples/`, whether using the core paradigm or the experimental paradigm.
 
 ## 📜 License
-This project uses the **MIT License** (Massachusetts Institute of Technology License), allowing individuals or companies to freely use, modify, and distribute this framework without paying licensing fees, only requiring retention of the original license notice in derivative works. See the [LICENSE](LICENSE) file for details.
+MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🔮 Future Vision
-This project aims to build a bridge from current engineering practices to the next generation of trustworthy AI models. The short-term goal is to become a "compliance toolkit for LLM deployment in high-risk scenarios", with long-term goals including:
-1. Building a cross-domain World Model Constitution library (healthcare, finance, judiciary, etc.), forming standardized structured knowledge assets;
-2. Implementing prototype validation of the Layered LLM architecture, exploring efficient collaboration mechanisms for "Attribute-Information-Behavior" modules;
-3. Developing automated World Model construction tools (e.g., extracting entities/rules from domain documents), lowering the barrier to ontology construction.
+## 🔮 Future Vision: Perceptive Programming
 
-## 🙏 Acknowledgments
-The core ideas of this project originate from research results and practical experience in the following areas, for which we extend our gratitude:
-1. "Neuro-symbolic fusion" research in trustworthy AI (e.g., neuro-symbolic AI, knowledge graph-enhanced LLMs);
-2. "World Model constrained generation" practices in the gaming industry (e.g., NPC behavior rules, plot logic consistency control);
-3. "Compliance validation" engineering solutions in healthcare/finance domains (e.g., digitized clinical guidelines, regulatory rule engines).
+Our long-term vision is to realize **Perceptive Programming**. Under this paradigm:
+- **You**: Are a **conductor** who declares goals, constraints, and domains through high-level language.
+- **The Framework**: Is a **symphony orchestra**, where its internal specialized objects (strings = generators, brass = validators, percussion = world models) collaborate under the coordination of an **AI Conductor (Meta-Router)** to independently plan and perform a harmonious piece.
+- **Output**: Are **reliable, well-documented outcomes**, as every step of execution is based on perception and reasoning about the real world.
 
-We also thank all developers who contribute tools to the open-source community (e.g., LangChain, Hugging Face Transformers), which provided foundational support for the rapid development of this framework.
+The **Constitutional-AI** framework is precisely the starting point of this vision. Starting from solid OOP practices, it provides you with a trustworthy, evolvable path to that future.
+
+**Join us in redefining the boundaries of programming together.**
