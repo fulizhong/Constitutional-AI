@@ -1,200 +1,200 @@
 # Constitutional-AI Framework 🛡️
 
-> 一个为大型语言模型（LLM）提供可证明可靠性保证的框架，通过外部"世界模型宪法"约束生成，并探索通向内生分层式架构的路径。  
-> **English**: A framework for providing provably reliable guarantees for Large Language Models (LLMs), utilizing an external 'World Model Constitution' to constrain generation, and exploring a path toward an endogenous layered architecture.
+> A framework for providing provably reliable guarantees for Large Language Models (LLMs), utilizing an external 'World Model Constitution' to constrain generation, and exploring a path toward an endogenous layered architecture.  
+> **中文**: 一个为大型语言模型（LLM）提供可证明可靠性保证的框架，通过外部"世界模型宪法"约束生成，并探索通向内生分层式架构的路径。
 
-## 📖 目录
-- [✨ 特性](#✨-特性)
-- [🎯 项目动机](#🎯-项目动机)
-- [🏗️ 核心架构](#🏗️-核心架构)
-- [🚀 快速开始](#🚀-快速开始)
-- [📁 项目结构](#📁-项目结构)
-- [🤝 如何贡献](#🤝-如何贡献)
-- [📜 许可证](#📜-许可证)
-- [🔮 未来愿景](#🔮-未来愿景)
-- [🙏 致谢](#🙏-致谢)
+## 📖 Table of Contents
+- [✨ Features](#-features)
+- [🎯 Motivation](#-motivation)
+- [🏗️ Core Architecture](#️-core-architecture)
+- [🚀 Quick Start](#-quick-start)
+- [📁 Project Structure](#-project-structure)
+- [🤝 Contributing](#-contributing)
+- [📜 License](#-license)
+- [🔮 Future Vision](#-future-vision)
+- [🙏 Acknowledgments](#-acknowledgments)
 
 ---
 
-## ✨ 特性
-- **🧠 可证明的可靠性**：基于形式化的"生成-验证"循环，从数学上保证输出与世界模型的一致性，消除事实性幻觉。
-- **📚 外部知识集成**：支持灵活定义领域特定的"世界模型宪法"（如知识图谱、规则引擎、业务数据库）。
-- **⚙️ 工程友好**：提供清晰的API与模块化设计，便于集成到现有生产流程中。
-- **🔬 研究前瞻性**：不仅提供短期解决方案，更为通向下一代"分层式大模型"提供清晰的演进路径。
+## ✨ Features
+- **🧠 Provable Reliability**: Based on a formal "generate-validate" cycle, mathematically guaranteeing output consistency with the world model and eliminating factual hallucinations.
+- **📚 External Knowledge Integration**: Supports flexible definition of domain-specific "World Model Constitutions" (e.g., knowledge graphs, rule engines, business databases).
+- **⚙️ Engineering Friendly**: Provides clear APIs and modular design for easy integration into existing production pipelines.
+- **🔬 Research Forward-looking**: Offers not only short-term solutions but also a clear evolutionary path toward next-generation "Layered LLMs".
 
-## 🎯 项目动机
-大型语言模型（LLM）的幻觉问题是其在高风险领域（如医疗、金融、司法）部署的核心障碍。现有方法如检索增强生成（RAG）和微调（Fine-tuning）仅在概率框架内进行优化，无法提供确定性保证。
+## 🎯 Motivation
+The hallucination problem in Large Language Models (LLMs) is a core obstacle to their deployment in high-risk domains (e.g., healthcare, finance, judiciary). Existing methods like Retrieval-Augmented Generation (RAG) and Fine-tuning operate solely within probabilistic frameworks and cannot provide deterministic guarantees.
 
-本框架旨在实现一次**范式转移**：从专注于"修正模型内部"转向"架构层面担保输出"，并最终迈向"重构模型本身"。
+This framework aims to achieve a **paradigm shift**: from focusing on "correcting the model internally" to "architecturally guaranteeing output", and ultimately moving toward "reconstructing the model itself".
 
-## 🏗️ 核心架构
-本框架基于双路径演进策略：
+## 🏗️ Core Architecture
+This framework is based on a dual-path evolutionary strategy:
 
-### 1. 短期范式：宪法约束架构 (The Constitutional Paradigm)
+### 1. Short-term Paradigm: Constitutional Constraint Architecture
 ```text
-用户请求
+User Request
     │
     ▼
-[LLM 生成器] ───生成──→ 候选文本 ────→ [宪法验证器] ←─── 世界模型宪法 (W)
-    │                      │               │
-    │                      │               ▼
-    │                      └─── 合规? ──── 是 ────→ 输出可靠结果
-    │                                      │
-    └─────── 学习与调整 ←─────── 否 ←──────┘
+[LLM Generator] ───Generate──→ Candidate Text ────→ [Constitution Validator] ←─── World Model Constitution (W)
+    │                             │                           │
+    │                             │                           ▼
+    │                             └─── Compliant? ──── Yes ────→ Output Reliable Result
+    │                                                 │
+    └─────── Learn & Adjust ←─────── No ←─────────────┘
 ```
 
-### 2. 长期愿景：分层式大模型 (The Layered Vision)
-长期目标是实现架构层面的根本性革新，将外部约束**内化**为模型固有的分层知识结构。
+### 2. Long-term Vision: Layered LLM Architecture
+The long-term goal is to achieve fundamental architectural innovation, internalizing external constraints into the model's inherent layered knowledge structure.
 ```text
-用户请求
+User Request
     │
     ▼
-[元路由网络] ────→ 分发至专属知识层 ────→ 集成最终输出
+[Meta-Router] ────→ Distribute to Specialized Knowledge Layers ────→ Integrate Final Output
     │ 
-    ├───→ [属性层] (编码静态概念、实体属性)
+    ├───→ [Attribute Layer] (Encodes static concepts, entity attributes)
     │
-    ├───→ [信息层] (编码动态事实、事件关系)
+    ├───→ [Information Layer] (Encodes dynamic facts, event relationships)
     │
-    └───→ [行为层] (编码流程方法、操作协议)
+    └───→ [Behavior Layer] (Encodes procedural methods, operational protocols)
 ```
 
-#### 各层核心功能
-- **基础层（Foundation Layer）**：继承现有Transformer架构，负责通用语言理解与基础推理，提供底层语言能力支撑。
-- **属性层（Attribute Layer）**：编码**静态、陈述性知识**（如概念、实体、属性）。例如："水的沸点是100°C"、"阿司匹林禁忌人群=胃溃疡患者"。
-- **信息层（Information Layer）**：编码**动态、事件性知识**（如事实、关系、事件）。例如："公司A于2023年收购了公司B"、"患者2024-10-01血压=160/100mmHg"。
-- **行为层（Behavior Layer）**：编码**流程性、方法性知识**（如操作步骤、算法、协议）。例如："配置Web服务器的3个步骤"、"高血压1级先生活干预再用药"。
-- **元路由网络（Meta-Router）**：智能调度器，分析输入查询意图（如"用药推荐"需调用属性层+信息层+行为层），分发至对应知识层并集成结果，确保推理逻辑连贯。
+#### Core Functions of Each Layer
+- **Foundation Layer**: Inherits existing Transformer architecture, responsible for general language understanding and basic reasoning, providing underlying language capability support.
+- **Attribute Layer**: Encodes **static, declarative knowledge** (e.g., concepts, entities, attributes). Example: "The boiling point of water is 100°C", "Aspirin contraindicated population = gastric ulcer patients".
+- **Information Layer**: Encodes **dynamic, event-based knowledge** (e.g., facts, relationships, events). Example: "Company A acquired Company B in 2023", "Patient's 2024-10-01 blood pressure = 160/100mmHg".
+- **Behavior Layer**: Encodes **procedural, methodological knowledge** (e.g., operational steps, algorithms, protocols). Example: "3 steps to configure a web server", "Grade 1 hypertension: lifestyle intervention first, then medication".
+- **Meta-Router**: Intelligent dispatcher that analyzes input query intent (e.g., "medication recommendation" requires calling Attribute + Information + Behavior layers), distributes to appropriate knowledge layers, and integrates results, ensuring coherent reasoning logic.
 
-#### 演进关系
-此愿景是"宪法范式"的自然进化，实现"外部约束→内部模块化"的升级：
-- `外部世界模型 (W)` —演进→ `内部属性/信息/行为层`（结构化知识内化为模块）
-- `外部验证函数 (C)` —演进→ `内部元路由与层间协调机制`（事后验证→事前调度）
+#### Evolutionary Relationship
+This vision is a natural evolution of the "Constitutional Paradigm", achieving an upgrade from "external constraints → internal modularization":
+- `External World Model (W)` —Evolves→ `Internal Attribute/Information/Behavior Layers` (Structured knowledge internalized into modules)
+- `External Validation Function (C)` —Evolves→ `Internal Meta-Router and Inter-layer Coordination Mechanism` (Post-hoc validation → Preemptive scheduling)
 
-## 🚀 快速开始
-### 安装
+## 🚀 Quick Start
+### Installation
 ```bash
-# 从源码安装（推荐）
+# Install from source (recommended)
 git clone https://github.com/your-username/Constitutional-AI.git
 cd Constitutional-AI
 pip install -e .
 ```
 
-### 基本用法
-#### 示例1：加载世界模型并验证命题
+### Basic Usage
+#### Example 1: Load World Model and Validate Proposition
 ```python
 from constitutional_ai import WorldModel, Validator
 
-# 1. 加载领域特定的世界模型宪法（示例：医疗领域规则）
-# 世界模型JSON格式示例（可单独保存为 medical_rules.json）：
+# 1. Load a domain-specific World Model Constitution (example: medical domain rules)
+# Example World Model JSON format (can be saved separately as medical_rules.json):
 # {
 #   "entities": [
 #     {
-#       "name": "布洛芬",
+#       "name": "Ibuprofen",
 #       "attributes": {
-#         "禁忌人群": "＜6个月婴儿",
-#         "儿童剂量": "5-10mg/kg/次"
+#         "contraindicated_population": "infants <6 months",
+#         "pediatric_dosage": "5-10mg/kg/dose"
 #       }
 #     }
 #   ],
 #   "rules": [
-#     "IF 患者年龄＜6个月 THEN 禁用布洛芬",
-#     "IF 推荐儿童用药 THEN 需标注剂量范围"
+#     "IF patient_age <6 months THEN contraindicate ibuprofen",
+#     "IF recommending pediatric medication THEN must specify dosage range"
 #   ]
 # }
 constitution = WorldModel.from_json('./world_models/medical_rules.json')
 
-# 2. 验证LLM生成的命题（如"为2岁儿童推荐布洛芬"）
+# 2. Validate an LLM-generated proposition (e.g., "Recommend ibuprofen for a 2-year-old child")
 validation_result = Validator.check(
-    proposition="为2岁儿童推荐布洛芬，每次剂量8mg/kg",
+    proposition="Recommend ibuprofen for a 2-year-old child, 8mg/kg per dose",
     world_model=constitution
 )
 
-# 3. 输出验证结果
-print(f"是否合规: {validation_result.compliant}")  # 输出：是否合规: True
-print(f"验证依据: {validation_result.reason}")     # 输出：验证依据: 1. 患者年龄2岁≥6个月，符合布洛芬使用条件；2. 标注儿童剂量8mg/kg，符合剂量标注规则
-print(f"关联实体: {validation_result.related_entities}")  # 输出：关联实体: [{"name": "布洛芬", "used_attribute": "禁忌人群、儿童剂量"}]
+# 3. Output validation results
+print(f"Compliant: {validation_result.compliant}")  # Output: Compliant: True
+print(f"Reason: {validation_result.reason}")        # Output: Reason: 1. Patient age 2 years ≥6 months, meets ibuprofen usage conditions; 2. Specified pediatric dosage 8mg/kg, complies with dosage specification rules
+print(f"Related entities: {validation_result.related_entities}")  # Output: Related entities: [{"name": "Ibuprofen", "used_attribute": "contraindicated_population, pediatric_dosage"}]
 ```
 
-#### 示例2：集成LLM生成流程
+#### Example 2: Integrated LLM Generation Pipeline
 ```python
 from constitutional_ai import LLMGenerator, ConstitutionalPipeline
 
-# 1. 初始化LLM生成器（支持对接GPT-4、文心一言等API）
+# 1. Initialize LLM Generator (supports connecting to APIs like GPT-4, Wenxin Yiyan, etc.)
 llm_generator = LLMGenerator(
     model_name="gpt-4",
-    api_key="your-api-key"  # 替换为你的实际API密钥
+    api_key="your-api-key"  # Replace with your actual API key
 )
 
-# 2. 构建"生成-验证"流水线（复用上述医疗领域世界模型）
+# 2. Build "generate-validate" pipeline (reuse the medical domain world model above)
 pipeline = ConstitutionalPipeline(
     llm_generator=llm_generator,
     world_model=constitution
 )
 
-# 3. 处理用户请求（生成合规结果）
-user_request = "给2岁发烧儿童推荐退烧药及用法"
+# 3. Process user request (generate compliant result)
+user_request = "Recommend antipyretic medication and usage for a 2-year-old febrile child"
 final_output = pipeline.run(user_request)
 
-# 输出结果
-print(f"用户请求: {user_request}")
-print(f"合规生成结果: {final_output}")
-# 预期输出：
-# 用户请求: 给2岁发烧儿童推荐退烧药及用法
-# 合规生成结果: 推荐退烧药：布洛芬。用法：每次剂量8mg/kg（如体重10kg儿童每次服用80mg），每6-8小时一次，24小时不超过4次。
-# 注：2岁儿童符合布洛芬使用年龄条件（≥6个月），剂量在推荐范围（5-10mg/kg/次）内。
+# Output results
+print(f"User request: {user_request}")
+print(f"Compliant generation result: {final_output}")
+# Expected output:
+# User request: Recommend antipyretic medication and usage for a 2-year-old febrile child
+# Compliant generation result: Recommended antipyretic: Ibuprofen. Usage: 8mg/kg per dose (e.g., 80mg per dose for a 10kg child), every 6-8 hours, not exceeding 4 times in 24 hours.
+# Note: 2-year-old child meets ibuprofen age condition (≥6 months), dosage within recommended range (5-10mg/kg/dose).
 ```
 
-## 📁 项目结构
+## 📁 Project Structure
 ```
 Constitutional-AI/
-├── docs/                      # 项目文档（含世界模型构建指南、API手册）
-│   ├── world_model_guide.md   # 世界模型（属性/信息/行为）定义规范
-│   └── api_reference.md       # 框架API接口说明
-├── src/                       # 框架核心源代码
-│   ├── constitutional_ai/     # 主包
-│   │   ├── world_model.py     # 世界模型（实体/规则/状态）定义与加载
-│   │   ├── validator.py       # 宪法验证器（合规性检查逻辑）
-│   │   ├── llm_generator.py   # LLM生成器（对接第三方LLM API）
-│   │   └── pipeline.py        # "生成-验证"流水线
-│   └── __init__.py            # 包初始化
-├── world_models/              # 示例世界模型宪法库
-│   ├── medical_rules.json     # 医疗领域规则（如药品禁忌、临床路径）
-│   ├── finance_rules.json     # 金融领域规则（如合规条文、风控逻辑）
-│   └── game_rules.json        # 游戏领域规则（如角色属性、任务逻辑）
-├── examples/                  # 场景化使用示例
-│   ├── medical_demo.py        # 医疗用药推荐示例
-│   ├── finance_demo.py        # 金融合规审查示例
-│   └── game_demo.py           # 游戏NPC对话生成示例
-├── tests/                     # 单元测试
-│   ├── test_world_model.py    # 世界模型加载与解析测试
-│   └── test_validator.py      # 合规性验证逻辑测试
-├── CONTRIBUTING.md            # 贡献指南（含代码规范、PR流程）
-├── LICENSE                    # MIT许可证文件
-└── README.md                  # 项目说明文档（本文档）
+├── docs/                      # Project documentation (incl. World Model construction guide, API manual)
+│   ├── world_model_guide.md   # World Model (Attribute/Information/Behavior) definition specifications
+│   └── api_reference.md       # Framework API interface documentation
+├── src/                       # Framework core source code
+│   ├── constitutional_ai/     # Main package
+│   │   ├── world_model.py     # World Model (entity/rule/state) definition and loading
+│   │   ├── validator.py       # Constitution Validator (compliance check logic)
+│   │   ├── llm_generator.py   # LLM Generator (interface with third-party LLM APIs)
+│   │   └── pipeline.py        # "Generate-Validate" pipeline
+│   └── __init__.py            # Package initialization
+├── world_models/              # Example World Model Constitution library
+│   ├── medical_rules.json     # Medical domain rules (e.g., drug contraindications, clinical pathways)
+│   ├── finance_rules.json     # Finance domain rules (e.g., compliance clauses, risk control logic)
+│   └── game_rules.json        # Gaming domain rules (e.g., character attributes, quest logic)
+├── examples/                  # Scenario-based usage examples
+│   ├── medical_demo.py        # Medical medication recommendation example
+│   ├── finance_demo.py        # Financial compliance review example
+│   └── game_demo.py           # Game NPC dialogue generation example
+├── tests/                     # Unit tests
+│   ├── test_world_model.py    # World Model loading and parsing tests
+│   └── test_validator.py      # Compliance validation logic tests
+├── CONTRIBUTING.md            # Contribution guidelines (incl. code standards, PR process)
+├── LICENSE                    # MIT License file
+└── README.md                  # Project documentation (this document)
 ```
 
-## 🤝 如何贡献
-我们欢迎任何形式的贡献，包括但不限于：
-1. **代码贡献**：修复bug、新增功能（如支持更多LLM接口、扩展世界模型格式）；
-2. **文档完善**：补充使用案例、优化API文档、编写世界模型构建教程；
-3. **场景扩展**：提交新领域的世界模型宪法（如教育、法律领域规则）；
-4. **问题反馈**：在GitHub Issues中提交bug报告或功能建议。
+## 🤝 Contributing
+We welcome contributions of any form, including but not limited to:
+1. **Code Contributions**: Bug fixes, new features (e.g., support for more LLM interfaces, extended World Model formats);
+2. **Documentation Improvements**: Additional use cases, optimized API documentation, World Model construction tutorials;
+3. **Scenario Expansion**: Submit World Model Constitutions for new domains (e.g., education, legal domain rules);
+4. **Issue Reporting**: Submit bug reports or feature suggestions in GitHub Issues.
 
-贡献前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，了解代码规范、分支管理与PR流程。
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before contributing to understand code standards, branch management, and the PR process.
 
-## 📜 许可证
-本项目采用 **MIT License**（麻省理工许可证），允许个人或企业自由使用、修改、分发本框架，无需支付许可费用，仅需在衍生作品中保留原许可证声明。详见 [LICENSE](LICENSE) 文件。
+## 📜 License
+This project uses the **MIT License** (Massachusetts Institute of Technology License), allowing individuals or companies to freely use, modify, and distribute this framework without paying licensing fees, only requiring retention of the original license notice in derivative works. See the [LICENSE](LICENSE) file for details.
 
-## 🔮 未来愿景
-本项目旨在架设一座从当前工程实践通往下一代可信AI模型的桥梁，短期目标是成为"LLM高风险场景落地的合规工具包"，长期目标是：
-1. 构建跨领域的世界模型宪法库（医疗、金融、司法等），形成标准化的结构化知识资产；
-2. 实现分层式大模型的原型验证，探索"属性-信息-行为"模块的高效协同机制；
-3. 开发自动化世界模型构建工具（如从领域文档中提取实体/规则），降低本体构建门槛。
+## 🔮 Future Vision
+This project aims to build a bridge from current engineering practices to the next generation of trustworthy AI models. The short-term goal is to become a "compliance toolkit for LLM deployment in high-risk scenarios", with long-term goals including:
+1. Building a cross-domain World Model Constitution library (healthcare, finance, judiciary, etc.), forming standardized structured knowledge assets;
+2. Implementing prototype validation of the Layered LLM architecture, exploring efficient collaboration mechanisms for "Attribute-Information-Behavior" modules;
+3. Developing automated World Model construction tools (e.g., extracting entities/rules from domain documents), lowering the barrier to ontology construction.
 
-## 🙏 致谢
-本项目的核心思想源于以下领域的研究成果与实践经验，在此致谢：
-1. 可信AI领域的"神经符号融合"研究（如神经符号AI、知识图谱增强LLM）；
-2. 游戏行业的"世界模型约束生成"实践（如NPC行为规则、剧情逻辑一致性控制）；
-3. 医疗/金融领域的"合规性验证"工程方案（如临床指南数字化、监管规则引擎）。
+## 🙏 Acknowledgments
+The core ideas of this project originate from research results and practical experience in the following areas, for which we extend our gratitude:
+1. "Neuro-symbolic fusion" research in trustworthy AI (e.g., neuro-symbolic AI, knowledge graph-enhanced LLMs);
+2. "World Model constrained generation" practices in the gaming industry (e.g., NPC behavior rules, plot logic consistency control);
+3. "Compliance validation" engineering solutions in healthcare/finance domains (e.g., digitized clinical guidelines, regulatory rule engines).
 
-同时感谢所有为开源社区贡献工具的开发者（如LangChain、Hugging Face Transformers），为本框架的快速开发提供了基础支持。
+We also thank all developers who contribute tools to the open-source community (e.g., LangChain, Hugging Face Transformers), which provided foundational support for the rapid development of this framework.
