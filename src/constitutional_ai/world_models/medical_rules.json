@@ -1,0 +1,32 @@
+{
+  "entities": [
+    {
+      "name": "ibuprofen",
+      "attributes": {
+        "min_age": 6,
+        "max_dose": "10mg/kg",
+        "contraindications": ["gastric_ulcer", "kidney_disease"]
+      }
+    },
+    {
+      "name": "aspirin",
+      "attributes": {
+        "min_age": 16,
+        "max_dose": "500mg",
+        "contraindications": ["gastric_ulcer", "bleeding_disorder"]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "condition": "patient.age < entity.min_age",
+      "action": "reject",
+      "message": "患者年龄不满足药物最低年龄要求"
+    },
+    {
+      "condition": "dose > entity.max_dose",
+      "action": "adjust",
+      "message": "剂量超过最大推荐剂量"
+    }
+  ]
+}
